@@ -1,18 +1,57 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import './tachyons.css'
+
+import './Components/TopBanner/TopBanner';
+import './Components/Navigation/Navigation';
+import Navigation from './Components/Navigation/Navigation';
+
+import TopBanner from './Components/TopBanner/TopBanner';
+import SignIn from './Components/SignIn/SignIn';
+import Register from './Components/Register/Register';
+import VehicleList from './Components/VehicleList/VehicleList';
+
+//import NavExample from './Components/Test/Test';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      route: "signin"
+    }
+  }
+
+  onRouteChange = (newRoute) =>{
+    this.setState({route: newRoute});
+    console.log('onRouteChange: ', this.state.route);
+  }
+
+  renderSwitch(param) {
+    switch(param) {      
+        case 'signin':
+          return <SignIn onRouteChange={this.onRouteChange} />;        
+        case 'register':
+          return <Register onRouteChange={this.onRouteChange} />;   
+        case 'vehicleList':
+          return <VehicleList onRouteChange={this.onRouteChange} />;   
+      default:
+        return 'No Route';
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="App"> 
+        <TopBanner />           
+         <Navigation onRouteChange={this.onRouteChange}/>
+         <div>
+         {   
+           this.renderSwitch(this.state.route)
+          //  (this.state.route === 'signin')?
+          //     <SignIn onRouteChange={this.onRouteChange} />: <Register onRouteChange={this.onRouteChange} />
+         }
+         </div>
       </div>
     );
   }
