@@ -29,7 +29,7 @@ const Register = ({onRouteChange}) => {
                     <div className="">
                     <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f4 dib" 
                     type="submit" 
-                    onClick = {() => onRouteChange("signin")}
+                    onClick = {() => onRouteChange("vehicleList")}
                     value="Register" 
                     />
                     </div>

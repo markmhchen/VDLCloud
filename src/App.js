@@ -18,13 +18,19 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      route: "signin"
+      route: "signin",
+      isSignedIn: false,
     }
   }
 
   onRouteChange = (newRoute) =>{
+    if (newRoute === "vehicleList"){
+      this.setState({isSignedIn: true});
+    } else {
+      this.setState({isSignedIn: false});
+    }
     this.setState({route: newRoute});
-    console.log('onRouteChange: ', this.state.route);
+    console.log('onRouteChange: ', newRoute);
   }
 
   renderSwitch(param) {
@@ -44,7 +50,7 @@ class App extends Component {
     return (
       <div className="App"> 
         <TopBanner />           
-         <Navigation onRouteChange={this.onRouteChange}/>
+         <Navigation onRouteChange={this.onRouteChange} isSignedIn = {this.state.isSignedIn}/>
          <div>
          {   
            this.renderSwitch(this.state.route)
